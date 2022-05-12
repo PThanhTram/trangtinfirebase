@@ -19,10 +19,11 @@
 			<div class="card mt-3">
 				<div class="card-header">Sửa bài viết</div>
 				<div class="card-body">
-					<form action="chude_sua_xuly.php" method="post" class="needs-validation" novalidate>
+					<form action="baiviet_sua_xuly.php" method="post" class="needs-validation" novalidate>
+						<input type="text" id="id" name="id" hidden />
 						<div class="mb-3">
 							<label for="id" class="form-label">Chủ đề</label>
-							<select class="form-select" id="id" name="id" required>
+							<select class="form-select" id="TenChuDe" name="TenChuDe" required>
 								<option value="">-- Chọn --</option>
 							</select>
 						</div>
@@ -30,7 +31,14 @@
 							<label for="TieuDe" class="form-label">Tiêu đề</label>
 							<input type="text" class="form-control" id="TieuDe" name="TieuDe" required />
 						</div>
-						
+						<div class="mb-3">
+							<label for="TomTat" class="form-label">Tóm tắt</label>
+							<input type="text" class="form-control" id="TomTat" name="TomTat" required />
+						</div>
+						<div class="mb-3">
+							<label for="NoiDung" class="form-label">Nội dung</label>
+							<textarea type="text" class="form-control" id="NoiDung" name="NoiDung"></textarea>
+						</div>
 						
 						<button type="submit" class="btn btn-primary">Cập nhật</button>
 					</form>
@@ -49,21 +57,24 @@
 			const chude = await getDocs(collection(db, 'chude'));
 			var output = '';
 			chude.forEach((d) => {
-				output += '<option value="' + d.id + '">' + d.data().TenChuDe + '</th>';
+				output += '<option value="' + d.data().TenChuDe + '">' + d.data().TenChuDe + '</option>';
 			});
-			$('#id').append(output);
+			$('#TenChuDe').append(output);
 			
 			const docRef = doc(db, 'baiviet', '<?php echo $_GET['id']; ?>');
 			const docSnap = await getDoc(docRef);
 			if (docSnap.exists()) {
-				const cd = await getDoc(docSnap.data().TenChuDe);
-				$('#id').val(cd.id);
+				$('#id').val(docSnap.id);
 				$('#TieuDe').val(docSnap.data().TieuDe);
-				$('#DiaChi').val(docSnap.data().DiaChi);
-				$('#GhiChu').val(docSnap.data().GhiChu);
+				$('#TomTat').val(docSnap.data().TomTat);
+				$('#NoiDung').val(docSnap.data().NoiDung);
 			} else {
 				console.log('No such document!');
 			}
+			$(document).ready(function(){     
+                $('#TenChuDe').find('option[value="' + docSnap.data().TenChuDe + '"]').attr('selected','selected');            
+        	});
+
 		</script>
 		<script>
 			(function() {
