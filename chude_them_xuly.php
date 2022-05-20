@@ -35,8 +35,11 @@
 			await addDoc(collection(db, "chude"), {
 			    TenChuDe: '<?php echo $_POST['TenChuDe']; ?>'
 			  });
-			
+
 			location.href = 'chude.php';
+			
 		</script>
+		
+
 	</body>
 </html>

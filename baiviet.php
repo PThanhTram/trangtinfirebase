@@ -28,7 +28,6 @@
                 <th width="20%">Chủ đề</th>
                 <th width="35%">Tiêu đề</th>
                 <th width="10%">Ngày đăng</th>
-                <th width="5%" title="Tình trạng kiểm duyệt?">D?</th>
                 <th width="5%">Sửa</th>
                 <th width="5%">Xóa</th>
               </tr>
@@ -60,7 +59,11 @@
         })
        return data;
     }
-  
+    function email(eMail) {
+        var name = eMail.replace(/@[^@]+$/, '');
+        return name;
+    }
+    
     const result = await getDanhSachBaiViet();
     var output = ''
     let i = 1
@@ -68,10 +71,12 @@
      
       output += '<tr>';
             output += '<td class="align-middle">' + i + '</td>';
-              output += '<td class="align-middle">' + data.NguoiDang + '</td>';
+              output += '<td class="align-middle">' + email(data.NguoiDang) + '</td>';
               output += '<td class="align-middle"><b>' + data.TenChuDe + '</td>';
               output += '<td class="align-middle"><b>' + data.TieuDe + '</td>';
+
               output += '<td class="align-middle"><b>' +  data.NgayDang.toDate().toLocaleDateString('vi-VN')+ '</td>';
+
               output += '<td class="align-middle text-center"><a href="baiviet_sua.php?id=' + data.id + '">Sửa</a></td>';
               output += '<td class="align-middle text-center"><a onclick="return confirm(\'Bạn có muốn xóa địa điểm ' + data.TieuDe + ' không?\')" href="baiviet_xoa.php?id=' + data.id + '">Xóa</a></td>';
           output += '</tr>';

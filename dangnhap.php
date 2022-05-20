@@ -1,162 +1,60 @@
-<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-<!------ Include the above in your HEAD tag ---------->
-
 <!DOCTYPE html>
-<html>
-<head>
-	<title>Đăng nhập</title>
-   <!--Made with love by Mutiullah Samim -->
-   
-	<!--Bootsrap 4 CDN-->
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-    
-    <!--Fontawesome CDN-->
-	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
-
-	<!--Custom styles-->
-</head>
-<body>
-<div class="container">
-			<?php
-               if(isset($_SESSION['status']))
-                    {
-                       echo "<h5 class= 'alert alert-success'>".$_SESSION['status']."</h5>";
-                        unset($_SESSION['status']);
-                    }
-            ?>
-	<div class="d-flex justify-content-center h-100">
-		<div class="card">
-			<div class="card-header">
-				<h3>Đăng nhập</h3>
-				<div class="d-flex justify-content-end social_icon">
-					<span><i class="fab fa-facebook-square"></i></span>
-					<span><i class="fab fa-google-plus-square"></i></span>
-					<span><i class="fab fa-twitter-square"></i></span>
+<html lang="en">
+	<head>
+		<!-- Required meta tags -->
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		
+		<!-- Bootstrap CSS -->
+		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+		
+		<title>Đăng nhập - Bản đồ AGU</title>
+	</head>
+	<body>
+		<div class="container">
+			<!-- Menu: sử dụng navbar -->
+			<?php include 'includes/navbar.php'; ?>
+			
+			<!-- Nội dung: sử dụng card -->
+			<div class="card mt-3">
+				<div class="card-header">Đăng nhập</div>
+				<div class="card-body">
+					<form action="dangnhap_xuly.php" method="post" class="needs-validation" novalidate>
+						<div class="mb-3">
+							<label for="email" class="form-label">Email</label>
+							<input type="email" class="form-control" id="email" name="email" required />
+							<div class="invalid-feedback">Email không được bỏ trống.</div>
+						</div>
+						<div class="mb-3">
+							<label for="password" class="form-label">Mật khẩu</label>
+							<input type="password" class="form-control" id="password" name="password" required />
+							<div class="invalid-feedback">Mật khẩu không được bỏ trống.</div>
+						</div>
+						
+						<button type="submit" class="btn btn-primary">Đăng nhập</button>
+					</form>
 				</div>
 			</div>
-			<div class="card-body">
-				
-				<form action="dangnhap_xuly.php" method="post" class="needs-validation" novalidate>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-user"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="Email" id="Email" name="Email" required>
-						
-					</div>
-					<div class="input-group form-group">
-						<div class="input-group-prepend">
-							<span class="input-group-text"><i class="fas fa-key"></i></span>
-						</div>
-						<input type="text" class="form-control" placeholder="Mật khẩu" id="Password" name="Password" required>
-						
-					</div>
-					<div class="row align-items-center remember">
-						<input type="checkbox">Nhớ tài khoản
-					</div>
-					<div class="form-group">
-						<input type="submit" value="Đăng Nhập" name="dangnhap" class="btn float-right login_btn">
-					</div>
-				</form>
-			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">				
-					Không có tài khoản?<a href="dangky.php">Đăng ký</a>
-				</div>
-			</div>
+			
+			<!-- Footer: tự code -->
+			<?php include 'includes/footer.php'; ?>
 		</div>
-	</div>
-</div>
-</body>
-<style >
-	@import url('https://fonts.googleapis.com/css?family=Numans');
-
-	html,body{
-		background-color: #ffd4aa;
-		background-size: cover;
-		background-repeat: no-repeat;
-		height: 100%;
-		font-family: 'Numans', sans-serif;
-	}
-
-	.container{
-		height: 100%;
-		align-content: center;
-	}
-
-	.card{
-		height: 350px;
-		margin-top: auto;
-		margin-bottom: auto;
-		width: 400px;
-		background-color: rgba(0,0,0,0.5) !important;
-	}
-
-	.social_icon span{
-		font-size: 60px;
-		margin-left: 10px;
-		color: #FFC312;
-	}
-
-	.social_icon span:hover{
-		color: white;
-		cursor: pointer;
-	}
-
-	.card-header h3{
-		color: white;
-	}
-
-	.social_icon{
-		position: absolute;
-		right: 20px;
-		top: -45px;
-	}
-
-	.input-group-prepend span{
-		width: 50px;
-		background-color: #FFC312;
-		color: black;
-		border:0 !important;
-	}
-
-	input:focus{
-		outline: 0 0 0 0  !important;
-		box-shadow: 0 0 0 0 !important;
-
-	}
-
-	.remember{
-	    color: white;
-	}
-
-	.remember input
-	{
-		width: 20px;
-		height: 20px;
-		margin-left: 15px;
-		margin-right: 5px;
-	}
-
-	.login_btn{
-		color: black;
-		background-color: #FFC312;
-		width: 110px;
-	}
-
-	.login_btn:hover{
-		color: black;
-		background-color: white;
-	}
-
-	.links{
-		color: white;
-	}
-
-	.links a{
-		margin-left: 4px;
-	}
-</style>
+		
+		<?php include 'javascript.php'; ?>
+		<script>
+			(function() {
+				'use strict';
+				var forms = document.querySelectorAll('.needs-validation');
+				Array.prototype.slice.call(forms).forEach(function(form) {
+					form.addEventListener('submit', function(event) {
+						if (!form.checkValidity()) {
+							event.preventDefault();
+							event.stopPropagation();
+						}
+						form.classList.add('was-validated');
+					}, false);
+				});
+			})();
+		</script>
+	</body>
 </html>

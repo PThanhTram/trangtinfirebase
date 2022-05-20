@@ -8,7 +8,7 @@
 		<!-- Bootstrap CSS -->
 		<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
 		
-		<title>Xử lý đăng nhập- Trang Tin</title>
+		<title>Xử lý đăng nhập - Bản đồ AGU</title>
 	</head>
 	<body>
 		<div class="container">
@@ -29,21 +29,30 @@
 		
 		<?php include 'javascript.php'; ?>
 		<script type="module">
+			
 			import { getAuth, signInWithEmailAndPassword } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js';
             const auth = getAuth();
-            signInWithEmailAndPassword(auth, '<?php echo $_POST['Email']; ?>', '<?php echo $_POST['Password']; ?>')
-            .then((userCredential) => {
-               
-                session_start();
-                $_SESSION['hovaten'] = 'tram';
-                $_SESSION['email'] = userCredential.user;
-            })
-            .catch((error) => {
-                const errorCode = error.code;
-                const errorMessage = error.message;
-            });            
-			
-			location.href = 'index.php';
+			var email = '<?php echo $_POST['email']; ?>';
+			var password = '<?php echo $_POST['password']; ?>';
+			signInWithEmailAndPassword(auth, email, password)
+			.then((userCredential) => {
+				const user = userCredential.user;
+				$.ajax({
+					type: 'POST',
+					url: 'dangnhap_ajax.php',
+					data: {
+						uid: user.uid,
+						email: user.email
+					},
+					dataType: 'text',
+					success: function(res) {
+						location.href = 'index.php';
+					}
+				});
+			}).catch((error) => {
+				console.log(error.message);
+			});
+		
 		</script>
 	</body>
 </html>

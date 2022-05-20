@@ -30,12 +30,14 @@
 		<?php include 'javascript.php'; ?>
 		<script type="module">
 			var date = new Date();
+		
+			
 			import { collection, addDoc,  getFirestore  } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
 			
 			const db = getFirestore();
 			await addDoc(collection(db, "baiviet"), {
 			    TenChuDe: '<?php echo $_POST['id']; ?>',
-			    NguoiDang: 'Tram',
+			    NguoiDang: '<?php echo $_SESSION['email']; ?>' ,
 			    NgayDang: date,
 			    TieuDe: '<?php echo $_POST['TieuDe']; ?>',
 			    TomTat: '<?php echo $_POST['TomTat']; ?>',

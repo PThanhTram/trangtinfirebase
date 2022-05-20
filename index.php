@@ -19,7 +19,9 @@
             <div class="card mt-3">
                 <div class="card-header">Trang chủ</div>
                 <div class="card-body">
-                    <p class="card-text">Trang chủ đang cập nhật.</p>
+                   <div class="row row-cols-1 row-cols-md-2 g-4" id="HienThi">
+
+                </div>
                 </div>
             </div>
             
@@ -28,5 +30,52 @@
         </div>
         
         <?php include 'javascript.php'; ?>
+        <script type="module">
+          import { getFirestore, collection, getDocs, getDoc, query, where } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
+          const db = getFirestore();
+          
+            async function getDanhSachBaiViet() {
+                let data = []
+                const querySnapshot = await getDocs(collection(db, "baiviet")); 
+                querySnapshot.forEach((doc) => {
+                  data.push({
+                    id: doc.id,
+                    ...doc.data()
+                  })
+                })
+               return data;
+            }
+          function email(eMail) {
+              var name = eMail.replace(/@[^@]+$/, '');
+              return name;
+          }
+         function firstImage(noiDung) {
+                  var regExp = /<img.+src=[\'"]([^\'"]+)[\'"].*>/i;
+                  var results = regExp.exec(noiDung);
+                  console.log(results);
+                  var image = './public/images/noimage.png';
+                  if(results) image = results[1];
+                  return image;
+              }
+        const result = await getDanhSachBaiViet();
+        var output = ''
+        const t = result.forEach((data=>{
+               
+          output += ' <div class="col">';
+                  output += '<div class="card">';
+                      output += ' <img src="'+firstImage(data.NoiDung)+'" class="card-img-top" alt="..." height="200">';
+                      output += '<div class="card-body">';
+                      output += '<h4 class="card-title">'+  data.TieuDe +'</h4>';
+                       output += '<h5 class="card-title"> Người đăng: '+ email(data.NguoiDang) +"  Ngày: "+ data.NgayDang.toDate().toLocaleDateString('vi-VN')+'</h5>';
+                      output += '<p class="card-text">'+data.TomTat+'</p>';
+                      output += '<a href="baiviet_chitiet.php?id=' + data.id + '" class="btn btn-warning">Đọc tiếp...</a></p>';
+                  output += '</div>';
+                                output += '</div>';
+
+         output += '</div>';
+        }))
+      $('#HienThi').html(output);
+
+    </script>
     </body>
 </html>
