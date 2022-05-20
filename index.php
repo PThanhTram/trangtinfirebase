@@ -68,7 +68,7 @@
                       output += '<h4 class="card-title">'+  data.TieuDe +'</h4>';
                        output += '<h5 class="card-title"> Người đăng: '+ email(data.NguoiDang) +"  Ngày: "+ data.NgayDang.toDate().toLocaleDateString('vi-VN')+'</h5>';
                       output += '<p class="card-text">'+data.TomTat+'</p>';
-                      output += '<a href="baiviet_chitiet.php?id=' + data.id + '" class="btn btn-warning">Đọc tiếp...</a></p>';
+                      output += '<a href="baiviet_chitiet.php?id=' + data.TieuDe + '" class="btn btn-warning">Đọc tiếp...</a></p>';
                   output += '</div>';
                                 output += '</div>';
 

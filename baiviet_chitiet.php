@@ -16,12 +16,7 @@
 		
 		<!-- Card: Header and Footer -->
 		<div class="card mt-3" id="HienThi">
-			<h5 class="card-header"><%= baiviet.TieuDe %></h5>
-			<div class="card-body">
-				<p class="card-text small text-muted">Ngày đăng <%= new Date(baiviet.NgayDang.toISOString()).toLocaleString("vi-VN") %>, bởi <%= baiviet.TaiKhoan.HoVaTen %>, có <%= baiviet.LuotXem %> lượt xem.</p>
-				<p class="card-text fw-bold"><%= baiviet.TomTat %></p>
-				<p class="card-text"><%- baiviet.NoiDung %></p>
-			</div>
+		
 		</div>
 		
 		<!-- Footer -->
@@ -30,40 +25,29 @@
 	
 	 <?php include 'javascript.php'; ?>
         <script type="module">
-          import { getFirestore, collection, getDocs, getDoc, query, where } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
+          import { getFirestore,collection, getDocs, query, where } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
           const db = getFirestore();
-          
-            async function getDanhSachBaiViet() {
-                let data = []
-                const querySnapshot = await getDocs(collection(db, "baiviet")); 
+          const q = query(collection(db, "baiviet"), where("TieuDe","==",'<?php echo $_GET['id']; ?>'));
+         
+            async function getChiTietBaiViet() {
+                let data = [];
+                const querySnapshot = await getDocs(q); 
                 querySnapshot.forEach((doc) => {
                   data.push({
-                    id: doc.id,
                     ...doc.data()
                   })
                 })
                return data;
             }
-          function email(eMail) {
-              var name = eMail.replace(/@[^@]+$/, '');
-              return name;
-          }
-         function firstImage(noiDung) {
-                  var regExp = /<img.+src=[\'"]([^\'"]+)[\'"].*>/i;
-                  var results = regExp.exec(noiDung);
-                  console.log(results);
-                  var image = './public/images/noimage.png';
-                  if(results) image = results[1];
-                  return image;
-              }
-        const result = await getDanhSachBaiViet();
+         
+        const result = await getChiTietBaiViet();
         var output = ''
         const t = result.forEach((data=>{
           output += '<h5 class="card-header">'+data.TieuDe+'</h5>';
                       output += ' <div class="card-body">';
 	                      output += '<p class="card-text small text-muted">Ngày đăng'+ data.NgayDang+'</p>';
-	                      output += '<p class="card-text fw-bold"></p>';
-	                      output += '<p class="card-text"></p>';
+	                      output += '<p class="card-text fw-bold">'+ data.TomTat + '</p>';
+	                      output += '<p class="card-text">'+ data.NoiDung+'</p>';
                       output += '</div>';
 
          output += '</div>';
