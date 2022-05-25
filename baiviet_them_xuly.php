@@ -39,6 +39,7 @@
 			    TenChuDe: '<?php echo $_POST['id']; ?>',
 			    NguoiDang: '<?php echo $_SESSION['email']; ?>' ,
 			    NgayDang: date,
+			    KiemDuyet: 0,
 			    TieuDe: '<?php echo $_POST['TieuDe']; ?>',
 			    TomTat: '<?php echo $_POST['TomTat']; ?>',
 			    NoiDung:'<?php echo $_POST['NoiDung']; ?>',

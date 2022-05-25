@@ -39,13 +39,18 @@
                 })
                return data;
             }
-         
+          function email(eMail) {
+        var name = eMail.replace(/@[^@]+$/, '');
+        return name;
+    }
+    
         const result = await getChiTietBaiViet();
         var output = ''
         const t = result.forEach((data=>{
+          output += '<p class="card-header"> Chủ đề: '+data.TenChuDe+'</p>';
           output += '<h5 class="card-header">'+data.TieuDe+'</h5>';
                       output += ' <div class="card-body">';
-	                      output += '<p class="card-text small text-muted">Ngày đăng'+ data.NgayDang+'</p>';
+	                      output += '<p class="card-text small text-muted">Ngày đăng: '+ data.NgayDang.toDate().toLocaleDateString('vi-VN')+", người đăng: "+ email(data.NguoiDang)+'</p>';
 	                      output += '<p class="card-text fw-bold">'+ data.TomTat + '</p>';
 	                      output += '<p class="card-text">'+ data.NoiDung+'</p>';
                       output += '</div>';

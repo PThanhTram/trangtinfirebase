@@ -35,7 +35,7 @@
 			const docRef = doc(db, 'baiviet', '<?php echo $_POST['id']; ?>');
 			await updateDoc(docRef, {
 			    TenChuDe: '<?php echo $_POST['TenChuDe']; ?>',
-			    NguoiDang: 'Tram',
+			   	   NguoiDang: '<?php echo $_SESSION['email']; ?>' ,
 			    NgayDang: date,
 			    TieuDe: '<?php echo $_POST['TieuDe']; ?>',
 			    TomTat: '<?php echo $_POST['TomTat']; ?>',

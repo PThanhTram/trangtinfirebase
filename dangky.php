@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Đăng nhập</title>
+	<title>Đăng ký</title>
    <!--Made with love by Mutiullah Samim -->
    
 	<!--Bootsrap 4 CDN-->
@@ -20,20 +20,38 @@
 </head>
 <body>
 <div class="container">
-			
 	<div class="d-flex justify-content-center h-100">
 		<div class="card">
 			<div class="card-header">
-				<h3>Đăng nhập</h3>
+				<h3>Đăng ký</h3>
 				<div class="d-flex justify-content-end social_icon">
 					<span><i class="fab fa-facebook-square"></i></span>
 					<span><i class="fab fa-google-plus-square"></i></span>
 					<span><i class="fab fa-twitter-square"></i></span>
 				</div>
+					
 			</div>
 			<div class="card-body">
+				<?php
+					session_start();
+					if(isset($_SESSION['status'])&&$_SESSION['status'] != "")
+					{
+						?>
+						<div class="alert alert-warning alert-dismissible fale show" role="alert">
+							<strong ><?php echo $_SESSION['status'] ?></strong>
+						</div>
+						<?php
+						unset($_SESSION['status']);
+					}
+				?>
 				
-				<form action="dangnhap_xuly.php" method="post" class="needs-validation" novalidate>
+				<form action="xuly.php" method="post" class="needs-validation" novalidate>
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-user"></i></span>
+						</div>
+						<input type="text" class="form-control" id="hovaten" name="hovaten" required placeholder="Họ và tên">
+					</div>
 					<div class="input-group form-group">
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-user"></i></span>
@@ -45,22 +63,21 @@
 						<div class="input-group-prepend">
 							<span class="input-group-text"><i class="fas fa-key"></i></span>
 						</div>
-						<input type="password" class="form-control" placeholder="Mật khẩu" id="password" name="password" required>
+						<input type="password" class="form-control" placeholder="password" id="matkhau" name="password" required>
 						
 					</div>
-					<div class="row align-items-center remember">
-						<input type="checkbox">Nhớ tài khoản
+					<div class="input-group form-group">
+						<div class="input-group-prepend">
+							<span class="input-group-text"><i class="fas fa-key"></i></span>
+						</div>
+						<input type="password" class="form-control" placeholder="Xác nhận mật khẩu" id="xacnhanmatkhau" name="xacnhanmatkhau" required>
 					</div>
 					<div class="form-group">
-						<input type="submit" value="Đăng Nhập" name="dangnhap" class="btn float-right login_btn">
+						<input type="submit" name="dangky" value="Đăng Ký" class="btn float-right register_btn">
 					</div>
 				</form>
 			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">				
-					Không có tài khoản?<a href="dangky.php">Đăng ký</a>
-				</div>
-			</div>
+				
 		</div>
 	</div>
 </div>
@@ -69,7 +86,7 @@
 	@import url('https://fonts.googleapis.com/css?family=Numans');
 
 	html,body{
-		background-color: #ffd4aa;
+		background-image: url('http://getwallpapers.com/wallpaper/full/a/5/d/544750.jpg');
 		background-size: cover;
 		background-repeat: no-repeat;
 		height: 100%;
@@ -82,10 +99,10 @@
 	}
 
 	.card{
-		height: 350px;
+		height: 420px;
 		margin-top: auto;
 		margin-bottom: auto;
-		width: 400px;
+		width: 470px;
 		background-color: rgba(0,0,0,0.5) !important;
 	}
 
@@ -135,13 +152,14 @@
 		margin-right: 5px;
 	}
 
-	.login_btn{
+	.register_btn{
+		margin-top: 10px;
 		color: black;
 		background-color: #FFC312;
 		width: 110px;
 	}
 
-	.login_btn:hover{
+	.register_btn:hover{
 		color: black;
 		background-color: white;
 	}

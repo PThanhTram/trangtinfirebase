@@ -17,9 +17,9 @@
 			
 			<!-- Nội dung: sử dụng card -->
 			<div class="card mt-3">
-				<div class="card-header">Xử lý đăng nhập</div>
+				<div class="card-header">Thông báo!</div>
 				<div class="card-body">
-					
+					<h2 style="color: red;">Thông tin đăng nhập không đúng xin đăng nhập lại!</h2>
 				</div>
 			</div>
 			

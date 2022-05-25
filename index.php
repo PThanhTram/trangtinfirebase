@@ -7,8 +7,8 @@
         
         <!-- Bootstrap CSS -->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-        
-        <title>AGUMap - Bản đồ AGU</title>
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.8.1/font/bootstrap-icons.css" rel="stylesheet">
+        <title>Trang Tin</title>
     </head>
     <body>
         <div class="container">
@@ -66,7 +66,7 @@
                       output += ' <img src="'+firstImage(data.NoiDung)+'" class="card-img-top" alt="..." height="200">';
                       output += '<div class="card-body">';
                       output += '<h4 class="card-title">'+  data.TieuDe +'</h4>';
-                       output += '<h5 class="card-title"> Người đăng: '+ email(data.NguoiDang) +"  Ngày: "+ data.NgayDang.toDate().toLocaleDateString('vi-VN')+'</h5>';
+                       output += '<h5 class="card-title">'+ email(data.NguoiDang) +" - "+ data.NgayDang.toDate().toLocaleDateString('vi-VN')+'</h5>';
                       output += '<p class="card-text">'+data.TomTat+'</p>';
                       output += '<a href="baiviet_chitiet.php?id=' + data.TieuDe + '" class="btn btn-warning">Đọc tiếp...</a></p>';
                   output += '</div>';
