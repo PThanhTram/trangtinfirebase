@@ -77,22 +77,14 @@
               output += '<td class="align-middle">' + data.TieuDe + '</td>';
 
               output += '<td class="align-middle">' +  data.NgayDang.toDate().toLocaleDateString('vi-VN')+ '</td>';
-              output += '<td class="align-middle">'
-
-                 <?php  if(data.KiemDuyet == 0){
-                            ?>
-                    '<a href="#"><i class="fa-solid fa-ban"></i></a>'
-                 <?php
-                              }
-
-                              else{
-                                ?>
-                    '<a href="#"><i class="fa-solid fa-circle-check"></i></a>'
-                  <?php   
-                              }
-                            ?>
-
-              '</td>';
+              if(data.KiemDuyet == 0)
+              {  
+                output += '<td class="align-middle"><a href="baiviet_kiemduyet.php?id=' + data.id + '"><i class="bi bi-dash-circle"></i></a> </td>' ;
+              }
+              else
+              {
+                output += '<td class="align-middle"><a href="baiviet_kiemduyet.php?id=' + data.id + '"><i class="bi bi-check"></i></a> </td>' ;
+              }
               output += '<td class="align-middle text-center"><a class="btn btn-primary" href="baiviet_sua.php?id=' + data.id + '"><i class="bi bi-pencil-square"></i></a></td>';
               output += '<td class="align-middle text-center"><a class="btn btn-danger" onclick="return confirm(\'Bạn có muốn xóa địa điểm ' + data.TieuDe + ' không?\')" href="baiviet_xoa.php?id=' + data.id + '"><i class="bi bi-x-square"></i></a></td>';
           output += '</tr>';
