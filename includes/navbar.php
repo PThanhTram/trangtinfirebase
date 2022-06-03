@@ -36,8 +36,8 @@
 					}
 				?>
 			</ul>
-			<form class="d-flex">
-				<input class="form-control me-2" type="search" placeholder="Tìm kiếm bài viết" aria-label="Search">
+			<form action="timkiem_xuly.php" method="get"class="d-flex">
+				<input class="form-control me-2" type="search" name="key" placeholder="Tìm kiếm bài viết" aria-label="Search">
 				<button class="btn btn-outline-success" type="submit">Tìm</button>
 			</form>
 		</div>
