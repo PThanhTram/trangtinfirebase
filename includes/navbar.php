@@ -26,7 +26,8 @@
 							<li><a class="dropdown-item" href="chude.php">Chủ đề</a></li>
 							<li><a class="dropdown-item" href="baiviet.php">Bài viết</a></li>
 							<li><hr class="dropdown-divider"></li>
-							<li><a class="dropdown-item" href="taikhoan.php">Tài khoản đăng nhập</a></li>
+              				<li><a class="dropdown-item" href="taikhoan.php">Tài khoản đăng nhập</a></li>
+							
 						</ul>
 					</li>
 					<li class="nav-item">

@@ -56,11 +56,7 @@
 					</div>
 				</form>
 			</div>
-			<div class="card-footer">
-				<div class="d-flex justify-content-center links">				
-					Không có tài khoản?<a href="dangky.php">Đăng ký</a>
-				</div>
-			</div>
+			
 		</div>
 	</div>
 </div>
@@ -82,7 +78,7 @@
 	}
 
 	.card{
-		height: 350px;
+		height: 300px;
 		margin-top: auto;
 		margin-bottom: auto;
 		width: 400px;

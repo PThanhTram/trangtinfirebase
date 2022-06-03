@@ -20,7 +20,8 @@
         <div class="card-header">Bài viết</div>
         <div class="card-body">
           <a href="baiviet_them.php" class="btn btn-success mb-2">Thêm mới</a>
-          <table class="table table-bordered table-hover table-sm mb-0">
+          <input style="float: right; height: 35px; margin-bottom: 10px;" type="text" id="myInput" onkeyup='tableSearch()' placeholder="Tìm kiếm">
+          <table class="table table-bordered table-hover table-sm mb-0" id="myTable">
             <thead class="text-center">
               <tr>
                 <th width="5%">#</th>
@@ -92,6 +93,30 @@
     }))
   $('#HienThi').html(output);
 
+    </script>
+     <script type="application/javascript">
+        function tableSearch() {
+            let input, filter, table, tr, td, txtValue;
+
+            //Intialising Variables
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            for (let i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[3];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+
+        }
     </script>
   </body>
 </html>

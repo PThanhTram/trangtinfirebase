@@ -44,18 +44,23 @@
     <script type="module">
       let i=1;
       import { getFirestore, collection, getDocs } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
-      const db = getFirestore();
-      const querySnapshot = await getDocs(collection(db, 'taikhoan'));
-      var output = '';
-      querySnapshot.forEach((doc) => {
-        output += '<tr>';
-        output += '<td class="align-middle text-center">' + i + '</td>';
-          output += '<td class="align-middle text-center">' + doc.data().email + '</td>';
-          output += '<td class="align-middle text-center"><a href="chude_sua.php?id=' + doc.id + '">Sửa</a></td>';
-          output += '<td class="align-middle text-center"><a onclick="return confirm(\'Bạn có muốn xóa chủ đề ' + doc.data().TenChuDe + ' không?\')" href="chude_xoa.php?id=' + doc.id + '">Xóa</a></td>';
-        output += '</tr>';
+      import { getAuth } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-auth.js';
+     const auth = getAuth();
+      const user = auth.currentUser;
+       var output = '';
+      if (user !== null) {
+        user.providerData.forEach((taikhoan) => {
+           output += '<tr>';
+            output += '<td class="align-middle text-center">' + i + '</td>';
+            output += '<td class="align-middle text-center">' + taikhoan.email + '</td>';
+            output += '<td class="align-middle text-center"><a href="chude_sua.php?id=' + doc.id + '">Sửa</a></td>';
+            output += '<td class="align-middle text-center"><a onclick="return confirm(\'Bạn có muốn xóa chủ đề ' + doc.data().TenChuDe + ' không?\')" href="chude_xoa.php?id=' + doc.id + '">Xóa</a></td>';
+          output += '</tr>';
         i++;
-      });
+        });
+      }
+     
+     
 
       $('#HienThi').html(output);
     </script>

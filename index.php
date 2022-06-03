@@ -33,10 +33,10 @@
         <script type="module">
           import { getFirestore, collection, getDocs, getDoc, query, where } from 'https://www.gstatic.com/firebasejs/9.8.1/firebase-firestore.js';
           const db = getFirestore();
-          
+          const q = query(collection(db, "baiviet"), where("KiemDuyet","==",1));
             async function getDanhSachBaiViet() {
                 let data = []
-                const querySnapshot = await getDocs(collection(db, "baiviet")); 
+                const querySnapshot = await getDocs(q); 
                 querySnapshot.forEach((doc) => {
                   data.push({
                     id: doc.id,
